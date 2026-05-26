@@ -21,16 +21,15 @@ jobs:
       - uses: android-actions/setup-android@v3
 
       - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: 8.10.2
 
       - name: Build APK
         run: |
-          cd project
-          find . -name gradlew
-          chmod +x $(find . -name gradlew)
-          cd $(find . -type f -name gradlew | head -n 1 | xargs dirname)
-          ./gradlew assembleDebug
+          cd project/ChulaXuta_Android
+          gradle assembleDebug
 
       - uses: actions/upload-artifact@v4
         with:
           name: ChutaXuta-Capitain-APK
-          path: project/**/app/build/outputs/apk/debug/*.apk
+          path: project/ChulaXuta_Android/app/build/outputs/apk/debug/*.apk
